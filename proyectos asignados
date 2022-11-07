@@ -35,6 +35,8 @@ if ingre.isdigit():
                                 print("Menú de opciones")
                                 print("1. Abrir cuadro de texto")
                                 print("2. Subir archivo")
+                            else: 
+                                print("Opción no válida")
                     else:
                         print("Tarea no existente")
             else:
