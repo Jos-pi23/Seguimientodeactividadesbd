@@ -13,8 +13,24 @@ if ingre.isdigit():
             if ingre == "1":
                 print("Participantes: Joel, Miguel, Juan")
                 print("Menú de opciones")
-                print("1. Eliminar participantes")
-                ingre = input("Eija una opción: ")
+                print("1. Agregar participante")
+                print("2. Eliminar participante")
+                ingre = input("Elija una opcion")
+                nombres = ["Joel", "Miguel", "Juan"]
+                if ingre.isdigit():
+                    if ingre == "1":
+                        nombre = input("Ingrese el nombre del nuevo participante :")
+                        nombres.append(nombre)
+                        print("Participante agregado con exito")
+                    elif ingre == "2":
+                        nombre = input("Ingrese el nombre del participante a ser eliminado: ")
+                        if nombre in nombres:
+                            nombres.remove(nombre)
+                            print("Participante eliminado con exito")
+                        else:
+                            print("El nombre ingresado no esta en la lista de participantes")
+                #print("1. Eliminar participantes")
+                #ingre = input("Eija una opción: ")
             elif ingre == "2":
                 print("TAREAS")
                 print("1. Tarea Array")
