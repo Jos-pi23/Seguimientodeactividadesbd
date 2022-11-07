@@ -19,6 +19,7 @@ if ingre.isdigit():
                 if ingre.isdigit():
                     if ingre == "1":
                         print("Nombre de la tarea: Tarea Array")
+                        print("Estado de la tarea: Pendiente")
                         print("Descripción: Crear una lista Arraylist con los nombres de sus familiares")
                         print("Fecha de asignación: 7/10/2022")
                         print("Fecha de entrega: 15/10/2022")
