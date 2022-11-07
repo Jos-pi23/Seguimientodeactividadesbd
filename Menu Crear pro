@@ -1,0 +1,45 @@
+def asignarUsuarios (cant):
+    listaUsuarios = []
+    for i in range(cant):
+        usuario = input("Ingrese el correo del usuario: ")
+        listaUsuarios.append(usuario)
+    return listaUsuarios
+
+def crearTareas(cant):
+    listaTareas = []
+    for i in range(cant):
+        nombre = input("Ingrese el nombre de la tarea: ")
+        fecha = input("Ingrese fecha de entrega: ")
+        descripcion = input("Ingrese la descripción: ")
+        tupla = (nombre,fecha,descripcion)
+        listaTareas.append(tupla)
+    return listaTareas
+
+def asignarTareas(listaUsuarios,listaTareas):
+    l_usuarioTarea = []
+    for usuario in listaUsuarios:
+        print(f"Usuario: {usuario}")
+        print(listaTareas)
+        print("Ingrese la opción que le asigna al usuario")
+
+
+print("Menu de opciones")
+print("1. Asignar usuarios colaboradores")
+print("2. Regresar")
+ingrePro = input("Ingrese una opción: ")
+if ingrePro.isdigit():
+    if ingrePro == "1":
+        cantiUsuarios = int(input("Ingrese la cantidad de colaboradores: "))
+        usuariosAsig = asignarUsuarios(cantiUsuarios)
+        cantiTareas = int(input("Ingrese la cantidad de tareas: "))
+        tareasCreadas = crearTareas(cantiTareas)
+        print("Menu de opciones")
+        print("1. Asignar tareas a colaboradores: ")
+        print("2. Regresar")
+        ingrePro2 = input("Ingrese una opción: ")
+        if ingrePro2.isdigit():
+            if ingrePro2 == "1":
+                asignaciones = asignarTareas(usuariosAsig,tareasCreadas)
+
+    else:
+        print("Opción no válida")
