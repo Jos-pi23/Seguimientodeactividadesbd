@@ -24,6 +24,16 @@ if ingre.isdigit():
                         print("Fecha de asignación: 7/10/2022")
                         print("Fecha de entrega: 15/10/2022")
                         print("Pedir ampliacion: si (si/no)")
+                        print("Menú de opciones")
+                        print("1. Pedir ampliación")
+                        print("2. Hacer tarea")
+                        if ingre.isdigit():
+                            if ingre == "1":
+                                amplia = input("Ingrese el motivo de la solicitud de ampliación: ")
+                            elif ingre == "2":
+                                print("Menú de opciones")
+                                print("1. Abrir cuadro de texto")
+                                print("2. Subir archivo")
                     else:
                         print("Tarea no existente")
             else:
