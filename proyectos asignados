@@ -27,6 +27,7 @@ if ingre.isdigit():
                         print("Menú de opciones")
                         print("1. Pedir ampliación")
                         print("2. Hacer tarea")
+                        ingre = input("Eija una tarea: ")
                         if ingre.isdigit():
                             if ingre == "1":
                                 amplia = input("Ingrese el motivo de la solicitud de ampliación: ")
