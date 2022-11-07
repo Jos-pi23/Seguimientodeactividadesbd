@@ -8,8 +8,8 @@ if ingreOP == 1:
     ingrePass = input("Ingrese su password: ")
 elif ingreOP == 2:
     newNombre = input("Ingrese su nombre: ")
-    newNombre = input("Ingrese un email: ")
-    newNombre = input("Ingrese una contraseña: ")
+    newMail = input("Ingrese un email: ")
+    newPass = input("Ingrese una contraseña: ")
     print("Cuenta registrada")
 else:
     print("Opción no válida")
