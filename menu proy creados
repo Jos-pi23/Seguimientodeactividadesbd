@@ -60,6 +60,7 @@ if ingre.isdigit():
                                         ingre = input("Eija una solicitud: ")
                                         if ingre.isdigit():
                                             if ingre == "1":
+                                                newFecha = input("Ingrese la nueva fecha: ")
                                                 print("Solicitud aprobada")
                                             elif ingre == "2":
                                                 print("Solicitud rechazada")
