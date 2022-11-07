@@ -24,8 +24,9 @@ while ingreOP != 0:
     print("Opción no válida")
     ingreOP2 = input("Ingrese una opción:")
     ingreOP = verificarDigito(ingreOP2)
-#menu de proyectos
 print("Sesion cerrada")
+#menu de proyectos
+
 print("1. Proyectos Creados")
 print("2. Proyectos Asignados")
 print("0. Volver")
