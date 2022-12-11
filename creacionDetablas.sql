@@ -2,7 +2,7 @@ create database SeguimientoActividades;
 use SeguimientoActividades;
 create table Lider(
   id_lider int primary key,
-  foreign key (id_lider) references Usuario(id_usuario)
+  foreign key (id_lider) references Usuario(id_user)
 );
 
 create table Colaborador(
