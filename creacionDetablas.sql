@@ -10,11 +10,14 @@ create table Colaborador(
   foreign key (id_colaborador) references Usuario(id_usuario)
 );
 
-create table Registro_inscripcion(
-  colaborador int,
-  foreign key (colaborador) references Colaborador(id_colaborador),
+CREATE TABLE Registro_inscripcion(
   lider int,
-  foreign key (lider) references Lider(id_lider)
+  colaborador int,
+  proyecto int,
+  primary key(lider,colaborador,proyecto),
+  foreign key (colaborador) references Colaborador(id_colaborador),
+  foreign key (lider) references Lider(id_lider),
+  foreign key (proyecto) references Proyecto(id_proyecto)
 );
 
 create table Tarea(
