@@ -45,6 +45,7 @@ CREATE TABLE Usuario (
 
 CREATE TABLE Proyecto (
 	id_proyecto INT AUTO_INCREMENT,
+	titulo VARCHAR(50),
     fecha_creacion DATE NOT NULL,
     fecha_cierre DATE NOT NULL,
     hora_cierre TIME NOT NULL,
