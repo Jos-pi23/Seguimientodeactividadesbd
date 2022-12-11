@@ -70,7 +70,7 @@ CREATE TABLE Registro_ampliacion (
     colaborador INT NOT NULL,
     lider INT NOT NULL,
     tarea INT NOT NULL,
-    PRIMARY KEY(id_proyecto),
+    PRIMARY KEY(id_resAmpliacion),
     FOREIGN KEY(lider) REFERENCES Lider(id_lider),
     FOREIGN KEY(tarea) REFERENCES Tarea(id_tarea)
 );
