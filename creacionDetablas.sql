@@ -28,7 +28,7 @@ create table Tarea(
   hora_limite time not null,
   fecha_revision date not null,
   hora_revision time not null,
-  descripcion varchar(50),
+  descripcion varchar(50) not null,
   calificacion int default 0 Check(calificacion<11 and calificacion>-1),
   estado enum('pendiente', 'realizado') not null
 );
