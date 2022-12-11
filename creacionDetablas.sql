@@ -7,7 +7,7 @@ create table Lider(
 
 create table Colaborador(
   id_colaborador int primary key,
-  foreign key (id_colaborador) references Usuario(id_usuario)
+  foreign key (id_colaborador) references Usuario(id_user)
 );
 
 CREATE TABLE Registro_inscripcion(
