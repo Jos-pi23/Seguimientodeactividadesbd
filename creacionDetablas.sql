@@ -15,7 +15,7 @@ create table Registro_inscripcion(
   foreign key (lider) references Lider(id_lider),
 );
 create table Tarea(
-	id_tarea int primary key,
+  id_tarea int primary key,
   proyecto  int,
   foreign key (proyecto) references Proyecto(id_proyecto),
   colaborador int,
@@ -24,7 +24,7 @@ create table Tarea(
   foreign key (lider) references Lider(id_lider),
   fecha_creacion date not null,
   hora_creacion time not null,
-	fecha_limite date not null,
+  fecha_limite date not null,
   hora_limite time not null,
   fecha_revision date not null,
   hora_revision time not null,
