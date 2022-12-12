@@ -57,7 +57,7 @@ CREATE TABLE Proyecto (
     fecha_cierre DATE NOT NULL,
     hora_cierre TIME NOT NULL,
     estado ENUM('pendiente','realizado') NOT NULL,
-	descripcion  VARCHAR(200) NOT NULL,
+	descripcion  VARCHAR(100) NOT NULL,
     lider INT NOT NULL,
     PRIMARY KEY(id_proyecto),
     FOREIGN KEY(lider) REFERENCES Lider(id_lider)
