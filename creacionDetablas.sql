@@ -22,6 +22,7 @@ CREATE TABLE Registro_inscripcion(
 
 create table Tarea(
   id_tarea int primary key,
+  titulo VARCHAR(50) NOT NULL,
   proyecto  int,
   foreign key (proyecto) references Proyecto(id_proyecto),
   colaborador int,
