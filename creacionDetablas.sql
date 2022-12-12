@@ -22,7 +22,7 @@ CREATE TABLE Registro_inscripcion(
 
 create table Tarea(
   id_tarea int primary key,
-  titulo VARCHAR(50) NOT NULL,
+  titulo VARCHAR(20) NOT NULL,
   proyecto  int,
   foreign key (proyecto) references Proyecto(id_proyecto),
   colaborador int,
@@ -52,7 +52,7 @@ CREATE TABLE Usuario (
 
 CREATE TABLE Proyecto (
 	id_proyecto INT AUTO_INCREMENT,
-	titulo VARCHAR(50) NOT NULL,
+	titulo VARCHAR(20) NOT NULL,
     fecha_creacion DATE NOT NULL,
     fecha_cierre DATE NOT NULL,
     hora_cierre TIME NOT NULL,
