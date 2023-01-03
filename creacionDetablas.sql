@@ -1,5 +1,16 @@
 create database SeguimientoActividades;
 use SeguimientoActividades;
+
+CREATE TABLE Usuario (
+	id_user INT AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL,
+    mail VARCHAR(50) NOT NULL,
+    contrasenia VARCHAR(20) NOT NULL,
+    esLider BOOLEAN NOT NULL,
+    esColaborador BOOLEAN NOT NULL,
+    PRIMARY KEY(id_user)
+);
+
 create table Lider(
   id_lider int primary key,
   foreign key (id_lider) references Usuario(id_user)
@@ -10,10 +21,23 @@ create table Colaborador(
   foreign key (id_colaborador) references Usuario(id_user)
 );
 
+CREATE TABLE Proyecto (
+	id_proyecto INT AUTO_INCREMENT,
+	titulo VARCHAR(20) NOT NULL,
+    fecha_creacion DATE NOT NULL,
+    fecha_cierre DATE NOT NULL,
+    hora_cierre TIME NOT NULL,
+    estado ENUM('pendiente','realizado') NOT NULL,
+	descripcion  VARCHAR(100) NOT NULL,
+    lider INT NOT NULL,
+    PRIMARY KEY(id_proyecto),
+    FOREIGN KEY(lider) REFERENCES Lider(id_lider)
+);
+
 CREATE TABLE Registro_inscripcion(
-  lider int,
-  colaborador int,
-  proyecto int,
+  lider int not null,
+  colaborador int not null,
+  proyecto int not null,
   primary key(lider,colaborador,proyecto),
   foreign key (colaborador) references Colaborador(id_colaborador),
   foreign key (lider) references Lider(id_lider),
@@ -21,7 +45,7 @@ CREATE TABLE Registro_inscripcion(
 );
 
 create table Tarea(
-  id_tarea int primary key,
+  id_tarea int primary key auto_increment,
   titulo VARCHAR(20) NOT NULL,
   proyecto  int,
   foreign key (proyecto) references Proyecto(id_proyecto),
@@ -40,28 +64,6 @@ create table Tarea(
   estado enum('pendiente', 'realizado') not null
 );
 
-CREATE TABLE Usuario (
-	id_user INT AUTO_INCREMENT,
-    nombre VARCHAR(50) NOT NULL,
-    mail VARCHAR(50) NOT NULL,
-    contrasenia VARCHAR(20) NOT NULL,
-    esLider BOOLEAN NOT NULL,
-    esColaborador BOOLEAN NOT NULL,
-    PRIMARY KEY(id_user)
-);
-
-CREATE TABLE Proyecto (
-	id_proyecto INT AUTO_INCREMENT,
-	titulo VARCHAR(20) NOT NULL,
-    fecha_creacion DATE NOT NULL,
-    fecha_cierre DATE NOT NULL,
-    hora_cierre TIME NOT NULL,
-    estado ENUM('pendiente','realizado') NOT NULL,
-	descripcion  VARCHAR(100) NOT NULL,
-    lider INT NOT NULL,
-    PRIMARY KEY(id_proyecto),
-    FOREIGN KEY(lider) REFERENCES Lider(id_lider)
-);
 
 CREATE TABLE Registro_ampliacion (
 	id_resAmpliacion INT AUTO_INCREMENT,
