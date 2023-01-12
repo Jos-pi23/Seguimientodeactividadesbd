@@ -1,3 +1,4 @@
+drop database if exists SeguimientoActividades;
 create database SeguimientoActividades;
 use SeguimientoActividades;
 
@@ -59,7 +60,8 @@ create table Tarea(
   hora_limite time not null,
   fecha_revision date not null,
   hora_revision time not null,
-  descripcion varchar(50) not null,
+  descripcion varchar(100) not null,
+  archivo blob default null,
   calificacion int default 0 Check(calificacion<11 and calificacion>-1),
   estado enum('pendiente', 'realizado') not null
 );
@@ -215,34 +217,44 @@ insert into registro_inscripcion values(
 insert into registro_inscripcion values(
 10,2,10);
 
-insert into tarea values(
+insert into tarea (id_tarea,titulo,proyecto,colaborador,lider,fecha_creacion,hora_creacion,fecha_limite,hora_limite,fecha_revision,hora_revision,descripcion,calificacion,estado) 
+values(
 1,"HOLA MUNDO",1,2,6,"2022-09-02","00:00:00","2022-09-12","00:00:00","2022-09-13","00:00:00", "imprimir en codigo hola mundo",null,'pendiente'
 );
-insert into tarea values(
+insert into tarea (id_tarea,titulo,proyecto,colaborador,lider,fecha_creacion,hora_creacion,fecha_limite,hora_limite,fecha_revision,hora_revision,descripcion,calificacion,estado)
+ values(
 2,"Tema de tesis",2,9,10,"2022-10-02","00:00:00","2022-10-03","00:00:00","2022-10-13","00:00:00", "escoger el tema de la tesis",null,'realizado'
 );
-insert into tarea values(
+insert into tarea (id_tarea,titulo,proyecto,colaborador,lider,fecha_creacion,hora_creacion,fecha_limite,hora_limite,fecha_revision,hora_revision,descripcion,calificacion,estado) 
+values(
 3,"imperio inca",3,2,4,"2022-11-02","00:00:00","2022-11-12","00:00:00","2022-11-13","00:00:00", "investigacion del imperio inca",null,'pendiente'
 );
-insert into tarea values(
+insert into tarea (id_tarea,titulo,proyecto,colaborador,lider,fecha_creacion,hora_creacion,fecha_limite,hora_limite,fecha_revision,hora_revision,descripcion,calificacion,estado)
+values(
 4,"escoger tema",4,2,1,"2022-10-12","00:00:00","2022-10-13","00:00:00","2022-10-15","00:00:00", "Seleccionar uno de los temas ",null,'realizado'
 );
-insert into tarea values(
+insert into tarea (id_tarea,titulo,proyecto,colaborador,lider,fecha_creacion,hora_creacion,fecha_limite,hora_limite,fecha_revision,hora_revision,descripcion,calificacion,estado)
+values(
 5,"HOLA MUNDO java",5,9,6,"2022-11-16","00:00:00","2022-11-17","00:00:00","2022-12-01","00:00:00", "imprimir en codigo hola mundo",8,'realizado'
 );
-insert into tarea values(
+insert into tarea (id_tarea,titulo,proyecto,colaborador,lider,fecha_creacion,hora_creacion,fecha_limite,hora_limite,fecha_revision,hora_revision,descripcion,calificacion,estado)
+values(
 6,"circular list",6,3,10,"2022-09-02","00:00:00","2022-09-12","00:00:00","2022-09-13","00:00:00", "crear la clases cl",10,'realizado'
 );
-insert into tarea values(
+insert into tarea (id_tarea,titulo,proyecto,colaborador,lider,fecha_creacion,hora_creacion,fecha_limite,hora_limite,fecha_revision,hora_revision,descripcion,calificacion,estado)
+values(
 7,"comprar circuitos",7,5,4,"2022-01-15","00:00:00","2022-02-12","00:00:00","2022-02-13","00:00:00", "comrar 3 circuitos con tarjeta de red",10,'realizado'
 );
-insert into tarea values(
+insert into tarea (id_tarea,titulo,proyecto,colaborador,lider,fecha_creacion,hora_creacion,fecha_limite,hora_limite,fecha_revision,hora_revision,descripcion,calificacion,estado)
+values(
 8,"diodos led",8,9,1,"2022-09-15","00:00:00","2022-09-17","00:00:00","2022-09-20","00:00:00", "comprar diodos led rgb",null,'pendiente'
 );
-insert into tarea values(
+insert into tarea (id_tarea,titulo,proyecto,colaborador,lider,fecha_creacion,hora_creacion,fecha_limite,hora_limite,fecha_revision,hora_revision,descripcion,calificacion,estado)
+values(
 9,"HOLA MUNDO c++",9,8,6,"2022-09-02","00:00:00","2022-09-12","00:00:00","2022-09-13","00:00:00", "imprimir en codigo hola mundo en c++",10,'realizado'
 );
-insert into tarea values(
+insert into tarea (id_tarea,titulo,proyecto,colaborador,lider,fecha_creacion,hora_creacion,fecha_limite,hora_limite,fecha_revision,hora_revision,descripcion,calificacion,estado)
+values(
 10,"ahorrar 10 mil",10,5,10,"2022-09-02","00:00:00","2023-09-12","00:00:00","2023-09-13","00:00:00", "cada mes reunir 1000$",null,'pendiente'
 );
 
