@@ -99,7 +99,7 @@ def menuProyectoAsignados(id_usuario):
         indice += 1
     
     ingre = int(input("Eija un proyecto: "))
-    if ingre <= len(proyectos):
+    if ingre <= len(proyectos) and ingre>0:
         proelegido = proyectos[ingre-1][0]
         print("\n-----------"+proelegido.upper()+"-----------")
         stmtidPro = "select id_proyecto from Proyecto where titulo = '" +proelegido+ "'"
@@ -193,30 +193,40 @@ def menuProyectoAsignados(id_usuario):
 def menuProyectosCreados(id_usuario):
     print("\n-----------PROYECTOS CREADOS-----------")
     print("Lista de proyectos creados")
-    stmtPC = "select titulo from Proyecto WHERE lider = " + str(id_usuario)
-    proyectos = connection.execute(stmtPC).fetchmany()
+    conProyec = "select titulo from Proyecto WHERE lider = " + str(id_usuario)
+    proyectos = connection.execute(conProyec).fetchall()
     for i in range(len(proyectos)):
-        print(str(i+1)+". "+proyectos[i])
-    print("0. Regresar")
-    ingre1 = input("Elija un proyecto: ")
-    if ingre1.isdigit(): #and int(ingre)<len(proyectos):
-        while ingre1 != "0":
-            tituloProyecto= proyectos[int(ingre1-1)]
-            print(tituloProyecto)
-            stmtidPro = "select id_proyecto FROM Proyecto where titulo = '" +tituloProyecto+ "'"
-            id_pro = stmtidPro[0]
-            #mostrar descripcion
-            print("Menú de opciones")
-            print("1. Ver participantes")
-            print("2. Ver tareas")
-            ingre2 = input("Elija una opción: ")
-            if ingre2.isdigit():
-                if ingre2 == "1":
-                    stmt4= "SELECT u.nombre FROM Usuario u join Registro_inscripcion r ON u.id_user = r.colaborador WHERE r.proyecto = "+str(id_pro)
-                    participantes = connection.execute(stmt4).fetchmany()
-                    print("Participantes: ")
-                    for i in range(len(participantes)):
-                        print(str(i+1)+". "+participantes[i])
+        print(str(i+1)+". "+proyectos[i][0])
+        
+    ingre1 = int(input("Elija un proyecto: "))
+    if ingre1<=len(proyectos) and ingre1>0:
+        proelegido = proyectos[ingre1-1][0]
+        print("\n-----------"+proelegido.upper()+"-----------")
+        stmtidPro = "select * from Proyecto where titulo = '" +proelegido+ "' and lider = "+str(id_usuario)
+        resPro = connection.execute(stmtidPro).fetchmany(1)
+        id_pro = resPro[0][0]
+        fech_crea = resPro[0][2]
+        fech_cier = resPro[0][3]
+        hora_cier = resPro[0][4]
+        estado = resPro[0][5]
+        descripcion = resPro[0][6]
+        #mostrar descripcion
+        print("Fecha creación: "+str(fech_crea))
+        print("Fecha cierre: "+str(fech_cier))
+        print("Hora cierre: "+str(hora_cier))
+        print("Estado del proyecto: "+estado)
+        print("Descripción de proyecto: "+descripcion)
+        print("\nMenú de opciones")
+        print("1. Ver participantes")
+        print("2. Ver tareas")
+        ingre2 = input("Elija una opción: ")
+        if ingre2.isdigit():
+            if ingre2 == "1":
+                stmt4= "SELECT u.nombre FROM Usuario u join Registro_inscripcion r ON u.id_user = r.colaborador WHERE r.proyecto = "+str(id_pro)
+                participantes = connection.execute(stmt4).fetchmany()
+                print("Participantes: ")
+                for i in range(len(participantes)):
+                    print(str(i+1)+". "+participantes[i])
                     print("Menú de opciones")
                     print("1. Agregar participante")
                     print("2. Eliminar participante")
@@ -227,12 +237,12 @@ def menuProyectosCreados(id_usuario):
                             subfunciones.asignarUsuarios()
                         elif ingre3 == "2":
                             subfunciones.eliminarUsuario()
-                elif ingre2 == "2":
-                    print("TAREAS")
-                    stmttituloTareas = "SELEC titulo FROM Tarea where proyecto = '" +tituloProyecto+"'"
-                    tareas = connection.execute(stmttituloTareas).fetchmany()
-                    for i in range(len(tareas)):
-                        print(str(i+1)+". "+ tareas[i])
+            elif ingre2 == "2":
+                print("TAREAS")
+                stmttituloTareas = "SELEC titulo FROM Tarea where proyecto = '" +tituloProyecto+"'"
+                tareas = connection.execute(stmttituloTareas).fetchmany()
+                for i in range(len(tareas)):
+                    print(str(i+1)+". "+ tareas[i])
                     print("0. regresar al menu principal")
                     ingre4 = input("Elija una tarea: ")
                     while ingre4 !="0":
@@ -288,6 +298,5 @@ def menuProyectosCreados(id_usuario):
 
                         else:
                             print("Opción no válida")
-            ingre
     else:
         print("Proyecto no existente")
