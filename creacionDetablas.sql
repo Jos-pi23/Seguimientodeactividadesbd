@@ -80,6 +80,14 @@ CREATE TABLE Registro_ampliacion (
     FOREIGN KEY(tarea) REFERENCES Tarea(id_tarea)
 );
 
+create table Tarea_Historial(
+	id_tarea int primary key,
+	finalizacion_tarea date,
+	date_revision date,
+	calificacion int,
+	foreign key (id_tarea) references tarea(id_tarea)
+);
+
 use SeguimientoActividades;
 
 insert into usuario
