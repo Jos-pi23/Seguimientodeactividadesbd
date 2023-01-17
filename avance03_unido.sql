@@ -89,6 +89,15 @@ end
 |
 DELIMITER ;
 
+DELIMITER |
+Create procedure CreateProyecto(in n_titulo varchar(20), in n_fecha_creacion date, in n_fecha_cierre date, in n_hora_cierre time, in n_descripcion varchar(100), in n_estado enum('pendiente', 'realizado'), in n_lider int)
+begin 
+	insert into usuario (titulo,fecha_creacion,fecha_cierre,hora_cierre,descripcion,estado,lider) values (n_titulo, n_fecha_creacion, n_fecha_cierre, n_hora_cierre, n_descripcion, n_estado, n_lider);
+end 
+|
+DELIMITER ;
+
+
 DELIMITER //
 CREATE PROCEDURE eliminar_participante(IN id_lider int, IN id_colaborador int, IN id_proyecto int)
 BEGIN
