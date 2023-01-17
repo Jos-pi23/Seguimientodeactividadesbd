@@ -6,39 +6,32 @@ import datetime
 engine = create_engine('mysql+pymysql://root:GoriChoi14@localhost:3306/SeguimientoActividades')
 connection = engine.connect()
 
-def asignarParticipantes(cant,id_lider,id_pro):
+def asignarUsuarios(cant,id_pro,id_lider):
+    indice = 1
     for i in range(cant):
         correo = input("Ingrese el correo del usuario: ")
         confirma = input("¿Continuar?: (s/n) ")
         if confirma == "s":
-            stmtuser = "select id_user,nombre from Usuario where mail = '" + str(correo) + "'"
-            tup_user = connection.execute(stmtuser).fetchmany(1)
-            id_colab = tup_user[0][0]
-            nom_colab = tup_user[0][1]
+            stmtuser = "select id_user from Usuario where mail = '" + str(correo) + "'"
+            tup_id = connection.execute(stmtuser).fetchmany(1)
+            id_colab = tup_id[0][0]
             ins_reg = "insert into Registro_inscripcion values ("+str(id_lider)+","+str(id_colab)+","+str(id_pro)+")"
-            connection.execute(ins_reg)
-            print("******* Colaborador "+nom_colab+" agregado *******")
+            resIns_reg = connection.execute(ins_reg)
+            print("******* Usuario "+str(indice)+" creado *******")
+            indice += 1
         
 
-def eliminarParticipante(cant,id_lider,id_proyec):
-    for i in range(cant):
-        correo = input("Ingrese el correo del usuario: ")
-        confirma = input("¿Continuar?: (s/n) ")
-        if confirma == "s":
-            stmtuser = "select id_user,nombre from Usuario where mail = '" + str(correo) + "'"
-            tup_user = connection.execute(stmtuser).fetchmany(1)
-            id_colab = tup_user[0][0]
-            nom_colab = tup_user[0][1]
-            stmtEli = "CALL eliminar_participante("+id_lider+","+id_colab+","+id_proyec+")"
-            connection.execute(stmtEli)
-            print("Participante "+nom_colab+ " eliminado exitosamente")
+def eliminarUsuario(cant):
+    print("Usuario eliminado exitosamente")
 
 
 
 def asignarTarea(inf_tarea, id_colab,id_lider,id_proy):
-    ins_tarea = f"call crear_tarea('{inf_tarea[0]}', {str(id_proy)}, {str(id_colab)}, {str(id_lider)}, '{inf_tarea[1]}', \
-    {inf_tarea[2]}','{inf_tarea[3]}', '{inf_tarea[4]}', '{inf_tarea[5]}', '{inf_tarea[6]}', '{inf_tarea[7]}')"
-    connection.execute(ins_tarea)
+    ins_tarea = "insert into Tarea (titulo,proyecto,colaborador,lider,fecha_creacion,hora_creacion,fecha_limite,hora_limite, \
+    fecha_revision,hora_revision,descripcion,estado) values ('" + inf_tarea[0] + "', " + str(id_proy) + ", " + str(id_colab) + ", " + str(id_lider) + \
+    ", '"+ inf_tarea[1] + "', '" + inf_tarea[2] +"', '"+ inf_tarea[3] + "', '" + inf_tarea[4]+ "', '" +inf_tarea[5]+"', '"+inf_tarea[6]+"', '"+ \
+    inf_tarea[7]+"', '"+"pendiente"+"')"
+    resIns_tar = connection.execute(ins_tarea)
     print("\n******* Tarea creada y asignada *******\n")
         
         
@@ -65,7 +58,7 @@ def crearTareas(cant,id_proyec,id_lider):
         else: 
             print("Datos no guardados")
 
-def convertirABinario(rutArchivo):
-	with open(rutArchivo, 'rb') as f:
+def convertirABinario(archivo):
+	with open(archivo, 'rb') as f:
 		blob = f.read()
 	return blob
