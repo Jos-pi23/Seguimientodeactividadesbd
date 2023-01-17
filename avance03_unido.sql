@@ -25,10 +25,13 @@ create trigger aceptar_ampliacion
 	after update on registro_ampliacion
 	for each row
     begin 
-		update tarea set fecha_limite = DATEADD(day,7,now()) where id_tarea=new.tarea and new.estado = 'aceptada';
+		update tarea set fecha_limite = date(timestampadd(day,7,now())) where id_tarea=new.tarea and new.estado = 'pendiente';
 	end
 |
 DELIMITER ;
+
+-- drop trigger aceptar_ampliacion;
+
 
 -- ********************REPORTES***********************
 create View Promedio_Notas_Tareas_realizadas
@@ -39,34 +42,33 @@ as select u.nombre, round(avg(t.calificacion),2)
 
 -- drop view Promedio_Notas_Tareas_realizadas;
 select * from Promedio_Notas_Tareas_realizadas;
-
+select * from tarea;
 create View Num_veces_Colaborador_No_Hizo_Tarea
 as select u.nombre as persona, count(id_tarea) as Num_Veces_No_Hizo_Tarea
 	from colaborador c join tarea t on t.colaborador=c.id_colaborador join usuario u on u.id_user=c.id_colaborador
     where t.fecha_limite>now() and estado = 'pendiente'
     group by persona;
-    
-select *
-from Num_veces_Colaborador_No_Hizo_Tarea;
+
+select * from Num_veces_Colaborador_No_Hizo_Tarea;
 
 CREATE VIEW mostrarTareas AS
 SELECT t.id_tarea,t.titulo AS nomTarea,p.id_proyecto,p.titulo AS nomProyecto,t.colaborador AS id_colaborador,
-u.nombre AS nomColab,t.lider AS id_lider,t.fecha_limite,hora_limite,t.descripcion,t.estado,t.fecha_revision,t.hora_revision,t.archivo,
+u.nombre AS nomColab,t.lider AS id_lider,t.fecha_creacion,t.fecha_limite,hora_limite,t.descripcion,t.estado,t.archivo,
 t.calificacion FROM Tarea t join Usuario u ON colaborador = u.id_user join Proyecto p ON t.proyecto = p.id_proyecto;
 
 -- DROP VIEW mostrarTareas;
 SELECT * FROM mostrarTareas;
 
 -- vista usuario con ampliaciones y datos
-drop view usuarioConAmpliacionPendiente;
+-- drop view usuarioConAmpliacionPendiente;
 CREATE VIEW usuarioConAmpliacionPendiente AS
    select u.nombre, t.titulo, ra.descripcion, t.fecha_limite as fecha_limite_tarea, ra.estado
 	from ((usuario u join  colaborador c on u.id_user=c.id_colaborador) join Registro_ampliacion ra on ra.colaborador=c.id_colaborador) join Tarea t on ra.Tarea = t.id_tarea
     where ra.estado = 'pendiente'
     order by fecha_limite DESC;
 -- reporte
-SELECT *
-from usuarioConAmpliacionPendiente;
+
+select * from usuarioConAmpliacionPendiente;
 
 -- ********************PROCEDURES***********************
 
@@ -78,6 +80,7 @@ end
 |
 DELIMITER ;
 
+CreateUser_Lider
 DELIMITER |
 Create procedure CreateUser_Lider(in u_nombre varchar(50), in u_mail varchar(50), in u_contrasenia varchar(50))
 begin 
