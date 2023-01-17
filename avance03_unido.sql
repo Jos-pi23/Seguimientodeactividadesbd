@@ -53,7 +53,7 @@ select * from Num_veces_Colaborador_No_Hizo_Tarea;
 
 CREATE VIEW mostrarTareas AS
 SELECT t.id_tarea,t.titulo AS nomTarea,p.id_proyecto,p.titulo AS nomProyecto,t.colaborador AS id_colaborador,
-u.nombre AS nomColab,t.lider AS id_lider,t.fecha_creacion,t.fecha_limite,hora_limite,t.descripcion,t.estado,t.archivo,
+u.nombre AS nomColab,t.lider AS id_lider,t.fecha_creacion,t.fecha_limite,hora_limite,t.fecha_revision,t.hora_revision,t.descripcion,t.estado,t.archivo,
 t.calificacion FROM Tarea t join Usuario u ON colaborador = u.id_user join Proyecto p ON t.proyecto = p.id_proyecto;
 
 -- DROP VIEW mostrarTareas;
