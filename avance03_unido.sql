@@ -249,3 +249,13 @@ BEGIN
 	END IF;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE crear_tarea(IN title varchar(20), IN id_pro INT, IN id_colab INT,IN id_lider INT ,IN fech_crea DATE, IN hor_crea TIME,
+IN fech_limit DATE, IN hora_limi TIME, IN fech_revi DATE, IN hora_revi TIME, IN descripcion varchar(100))
+BEGIN 
+insert into Tarea (titulo,proyecto,colaborador,lider,fecha_creacion,hora_creacion,fecha_limite,
+hora_limite,fecha_revision,hora_revision,descripcion,estado) values (title, id_pro,id_colab,id_lider,fech_crea,hor_crea,fech_limit,
+hora_limit,fech_revi,hora_revi,descripcion,'pendiente');
+END //
+DELIMITER ;
