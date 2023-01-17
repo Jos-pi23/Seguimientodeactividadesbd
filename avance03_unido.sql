@@ -98,6 +98,15 @@ end
 DELIMITER ;
 
 
+DELIMITER |
+Create procedure CreateRegistroInscripcion(IN id_lider int, in id_colaborador int, in id_proyecto int )
+begin 
+	insert into usuario (lider, colaborador, proyecto) values (id_lider, id_colaborador, id_proyecto);
+end 
+|
+DELIMITER ;
+
+
 DELIMITER //
 CREATE PROCEDURE eliminar_participante(IN id_lider int, IN id_colaborador int, IN id_proyecto int)
 BEGIN
